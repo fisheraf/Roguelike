@@ -127,7 +127,9 @@ class GameMap:
 
         monster_chances = {
             'orc': 80,
-            'troll': from_dungeon_level([[15, 3], [30, 5], [60, 7]], self.dungeon_level)
+            'troll': from_dungeon_level([[15, 3], [30, 5], [60, 7]], self.dungeon_level),
+            'ogre': from_dungeon_level([[5, 3], [10, 5], [15, 5]], self.dungeon_level),
+            'wyvern': from_dungeon_level([[5, 5], [10, 7], [15, 9]], self.dungeon_level)
         }
 
         item_chances = {
@@ -152,13 +154,25 @@ class GameMap:
                     fighter_component = Fighter(hp=20, defense=0, power=4, xp=35)
                     ai_component = BasicMonster()
 
-                    monster = Entity(x, y, 'o', libtcod.desaturated_green, 'Orc', blocks=True,
-                                     render_order=RenderOrder.ACTOR, fighter=fighter_component, ai=ai_component)
-                else:
+                    monster = Entity(x, y, 'o', libtcod.desaturated_green, 'Orc', blocks=True, fighter=fighter_component,
+                                     render_order=RenderOrder.ACTOR, ai=ai_component)
+                elif monster_choice == 'troll':
                     fighter_component = Fighter(hp=30, defense=2, power=8, xp=100)
                     ai_component = BasicMonster()
 
                     monster = Entity(x, y, 'T', libtcod.darker_green, 'Troll', blocks=True, fighter=fighter_component,
+                                     render_order=RenderOrder.ACTOR, ai=ai_component)
+                elif monster_choice == 'ogre':
+                    fighter_component = Fighter(hp=50, defense=2, power=15, xp=500)
+                    ai_component = BasicMonster()
+
+                    monster = Entity(x, y, 'O', libtcod.darker_green, 'Ogre', blocks=True, fighter=fighter_component,
+                                     render_order=RenderOrder.ACTOR, ai=ai_component)
+                else:
+                    fighter_component = Fighter(hp=100, defense=4, power=10, xp=1000)
+                    ai_component = BasicMonster()
+
+                    monster = Entity(x, y, 'W', libtcod.darker_green, 'Wyvern', blocks=True, fighter=fighter_component,
                                      render_order=RenderOrder.ACTOR, ai=ai_component)
 
                 entities.append(monster)
