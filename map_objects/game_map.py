@@ -134,6 +134,8 @@ class GameMap:
 
         item_chances = {
             'healing_potion': 35,
+            'right_ring': 100,
+            'left_ring': 100,
             'sword': from_dungeon_level([[5, 4]], self.dungeon_level),
             'shield': from_dungeon_level([[15, 8]], self.dungeon_level),
             'lightning_scroll': from_dungeon_level([[25, 4]], self.dungeon_level),
@@ -194,6 +196,12 @@ class GameMap:
                 elif item_choice == 'shield':
                     equippable_component = Equippable(EquipmentSlots.OFF_HAND, defense_bonus=1)
                     item = Entity(x, y, '[', libtcod.darker_orange, 'Shield', equippable=equippable_component)
+                elif item_choice == 'right_ring':
+                    equippable_component = Equippable(EquipmentSlots.RIGHT_RING, defense_bonus=1)
+                    item = Entity(x, y, 'o', libtcod.gold, 'Gold Ring', equippable=equippable_component)
+                elif item_choice == 'left_ring':
+                    equippable_component = Equippable(EquipmentSlots.LEFT_RING, power_bonus=1)
+                    item = Entity(x, y, 'o', libtcod.silver, 'Silver Ring', equippable=equippable_component)
                 elif item_choice == 'fireball_scroll':
                     item_component = Item(use_function=cast_fireball, targeting=True, targeting_message=Message(
                         'Left-click a target tile for the fireball, or right-click to cancel.', libtcod.light_cyan),
